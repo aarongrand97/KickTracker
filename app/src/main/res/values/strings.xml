@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">KickTracker</string>
+    <string name="new_session">New Session</string>
+    <string name="view_data">View Data</string>
+    <string name="new_kick">New Kick</string>
+    <string name="num_kicks">Kicks</string>
+    <string name="num_sccss">Successes</string>
+    <string name="inc">+</string>
+    <string name="dec">-</string>
+    <string name="store">store</string>
+    <string name="saveSession">Save Session</string>
+    <string name="percentage">Percentage</string>
+    <string name="ovrl_stats">Overall Stats</string>
+</resources>
