@@ -21,7 +21,10 @@ import java.util.Date;
 public class NewSessionActivity extends AppCompatActivity {
     int[][][] m_sessionArray = new int[7][10][2]; // first layer is attempts, second is successes
 
-    TextView m_displayKicksValue, m_displaySccssValue, m_dateTime;
+    TextView m_displayKicksValue, m_displaySccssValue, m_displayPrcntgValue, m_dateTime;
+    View m_backGroundView;
+
+    int m_totalKicks, m_totalSccss;
 
     gridViewSessionDisplay m_gridView;
 
@@ -35,9 +38,18 @@ public class NewSessionActivity extends AppCompatActivity {
 
         m_displayKicksValue = findViewById(R.id.kickDisplayValue);
         m_displaySccssValue = findViewById(R.id.sccssDisplayValue);
+        m_displayPrcntgValue = findViewById(R.id.prctgeDisplayValue);
+
+        m_backGroundView = findViewById(R.id.backGroundView);
+        setUpBackgroundListener();
+
         m_dateTime = findViewById(R.id.dataTimeTextView);
         String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
         m_dateTime.setText(currentDateTimeString);
+
+        m_totalKicks = 0;
+        m_totalSccss = 0;
+        displaySessionStats();
     }
 
     public void newKick(View view){
@@ -64,6 +76,11 @@ public class NewSessionActivity extends AppCompatActivity {
                 m_sessionArray[row][col][1] += sccss;
 
                 m_gridView.setSelectedCell(-1,-1); // remove any selection
+
+                // update session stats
+                m_totalKicks += kicks;
+                m_totalSccss += sccss;
+                displaySessionStats();
             }
         }
     }
@@ -75,7 +92,24 @@ public class NewSessionActivity extends AppCompatActivity {
 
        m_displayKicksValue.setText(Integer.toString(numKicks));
        m_displaySccssValue.setText(Integer.toString(numSccss));
+       if(numKicks == 0){
+           m_displayPrcntgValue.setText("-");
+       }
+       else {
+           m_displayPrcntgValue.setText(Integer.toString(numSccss * 100 / numKicks));
+       }
 
+    }
+
+    private void displaySessionStats(){
+        m_displayKicksValue.setText(Integer.toString(m_totalKicks));
+        m_displaySccssValue.setText(Integer.toString(m_totalSccss));
+        if(m_totalKicks == 0){
+            m_displayPrcntgValue.setText("-");
+        }
+        else{
+            m_displayPrcntgValue.setText(Integer.toString(m_totalSccss * 100 / m_totalKicks));
+        }
     }
 
     // called from link in XML file, saves session to database
@@ -83,6 +117,7 @@ public class NewSessionActivity extends AppCompatActivity {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(NewSessionActivity.this);
         boolean success = dataBaseHelper.addOne(m_dateTime.getText().toString(), sessionArrayToString());
         Toast.makeText(NewSessionActivity.this, "Success = " + success, Toast.LENGTH_SHORT).show();
+        finish();
 
     }
 
@@ -96,6 +131,16 @@ public class NewSessionActivity extends AppCompatActivity {
             }
         }
         return arrayString;
+    }
+
+    private void setUpBackgroundListener(){
+        m_backGroundView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                m_gridView.reset();
+                displaySessionStats();
+            }
+        });
     }
 
     public int[][][] getSessionArray(){

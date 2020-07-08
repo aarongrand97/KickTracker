@@ -2,8 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backGroundView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="auto"
+    android:focusableInTouchMode="false"
     tools:context=".NewSessionActivity">
 
     <com.example.kicktracker.gridViewSessionDisplay
@@ -50,8 +54,8 @@
         android:id="@+id/kicksDisplayLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginBottom="60dp"
         android:text="@string/num_kicks"
         app:layout_constraintBottom_toTopOf="@+id/new_kick"
@@ -71,8 +75,8 @@
         android:id="@+id/sccssDisplayLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginBottom="60dp"
         android:text="@string/num_sccss"
         app:layout_constraintBottom_toTopOf="@+id/new_kick"
@@ -82,8 +86,8 @@
         android:id="@+id/sccssDisplayValue"
         android:layout_width="30dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@+id/new_kick"
         app:layout_constraintStart_toEndOf="@+id/sccssDisplayLabel" />
@@ -115,4 +119,24 @@
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/prctgeDisplayLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/percentage"
+        app:layout_constraintStart_toEndOf="@+id/sccssDisplayValue"
+        app:layout_constraintTop_toTopOf="@+id/sccssDisplayValue" />
+
+    <TextView
+        android:id="@+id/prctgeDisplayValue"
+        android:layout_width="33dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toEndOf="@+id/prctgeDisplayLabel"
+        app:layout_constraintTop_toTopOf="@+id/prctgeDisplayLabel" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

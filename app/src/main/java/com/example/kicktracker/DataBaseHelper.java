@@ -10,6 +10,8 @@ import android.util.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
+///////////// TABLE COLUMNS ARE: | ID | SESSION_NAME | SESSION_ARRAY | /////////////
+
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final String SESSIONS_TABLE = "SESSIONS_TABLE";

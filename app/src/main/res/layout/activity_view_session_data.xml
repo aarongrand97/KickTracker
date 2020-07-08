@@ -2,8 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgroundView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="auto"
+    android:focusableInTouchMode="false"
     tools:context=".ViewSessionDataActivity">
 
     <com.example.kicktracker.gridViewSessionDisplayDataParent
@@ -72,7 +76,7 @@
         app:layout_constraintTop_toTopOf="@+id/sccssDisplayLabel" />
 
     <TextView
-        android:id="@+id/percentageLabel"
+        android:id="@+id/prctgeDisplayLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -82,12 +86,12 @@
         app:layout_constraintTop_toTopOf="@+id/sccssDisplayValue" />
 
     <TextView
-        android:id="@+id/percentageValue"
+        android:id="@+id/prctgeDisplayValue"
         android:layout_width="33dp"
         android:layout_height="28dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        app:layout_constraintStart_toEndOf="@+id/percentageLabel"
-        app:layout_constraintTop_toTopOf="@+id/percentageLabel" />
+        app:layout_constraintStart_toEndOf="@+id/prctgeDisplayLabel"
+        app:layout_constraintTop_toTopOf="@+id/prctgeDisplayLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

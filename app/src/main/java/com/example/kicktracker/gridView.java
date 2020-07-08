@@ -122,5 +122,11 @@ public class gridView extends View {
 
     }
 
+    protected void reset(){
+        selectedCol = -1;
+        selectedRow = -1;
+        invalidate();
+    }
+
 }
 

@@ -1,8 +1,10 @@
 package com.example.kicktracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class ViewSessionDataActivity extends AppCompatActivity {
@@ -13,6 +15,9 @@ public class ViewSessionDataActivity extends AppCompatActivity {
     TextView m_displayKicksValue;
     TextView m_displaySccssValue;
     TextView m_displayPcntgValue;
+    ConstraintLayout m_backGroundLayout;
+
+    int m_totalKicks, m_totalSccss, m_totalPrcntg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +27,17 @@ public class ViewSessionDataActivity extends AppCompatActivity {
         m_gridView = findViewById(R.id.grid_view);
         m_gridView.setM_parentSession(ViewSessionDataActivity.this);
 
-        //String sessionString = getIntent().getStringExtra("sessionString");
-        //m_sessionArray = m_gridView.convertSessionStringToArray(sessionString);
-
         m_sessionArray = (int[][][]) getIntent().getExtras().getSerializable("array");
 
         m_displayKicksValue = findViewById(R.id.kickDisplayValue);
         m_displaySccssValue = findViewById(R.id.sccssDisplayValue);
-        m_displayPcntgValue = findViewById(R.id.percentageValue);
+        m_displayPcntgValue = findViewById(R.id.prctgeDisplayValue);
+
+        m_backGroundLayout  = findViewById(R.id.backgroundView);
+        setBackGroundListener();
+
+        calculateSessionTotals();
+        showOverallSessionStats();
 
     }
 
@@ -45,6 +53,32 @@ public class ViewSessionDataActivity extends AppCompatActivity {
         else{
             m_displayPcntgValue.setText(Integer.toString(100*numSccss / numKicks));
         }
+    }
+
+    private void showOverallSessionStats(){
+         m_displayKicksValue.setText(Integer.toString(m_totalKicks));
+         m_displaySccssValue.setText(Integer.toString(m_totalSccss));
+         m_displayPcntgValue.setText(Integer.toString(m_totalPrcntg));
+    }
+
+    private void setBackGroundListener(){
+        m_backGroundLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                m_gridView.reset(); // removes the selection of cell
+                showOverallSessionStats();
+            }
+        });
+    }
+
+    private void calculateSessionTotals(){
+        for(int row = 0; row != 7; row++){
+            for(int col = 0; col != 10; col++){
+                m_totalKicks += m_sessionArray[row][col][0];
+                m_totalSccss += m_sessionArray[row][col][1];
+            }
+        }
+        m_totalPrcntg = m_totalSccss*100/m_totalKicks;
     }
 
     public int [][][] getSessionArray(){
