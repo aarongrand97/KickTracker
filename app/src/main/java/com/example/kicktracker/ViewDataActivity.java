@@ -3,9 +3,7 @@ package com.example.kicktracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabaseLockedException;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,10 +42,12 @@ public class ViewDataActivity extends AppCompatActivity {
                 String sessionName = (String) adapterView.getItemAtPosition(i);
                 DataBaseHelper dataBaseHelper = new DataBaseHelper(ViewDataActivity.this);
                 int[][][] sessionArray = dataBaseHelper.getSessionArray(sessionName);
+                String sessionNotes = dataBaseHelper.getSessionNotes(sessionName);
                 // Want the intent that takes the user to the view session action
                 Intent intent = new Intent(ViewDataActivity.this, ViewSessionDataActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("array", sessionArray);
+                bundle.putString("notes", sessionNotes);
                 intent.putExtras(bundle);
                 // Should get the array here then pass it to the viewSessionDataActivity or maybe just the string??
                 startActivity(intent);

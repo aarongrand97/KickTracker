@@ -5,26 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 
 
-public class NewSessionActivity extends AppCompatActivity {
+public class    NewSessionActivity extends AppCompatActivity {
     int[][][] m_sessionArray = new int[7][10][2]; // first layer is attempts, second is successes
 
     TextView m_displayKicksValue, m_displaySccssValue, m_displayPrcntgValue, m_dateTime;
     View m_backGroundView;
 
     int m_totalKicks, m_totalSccss;
+    String m_notes;
 
     gridViewSessionDisplay m_gridView;
 
@@ -47,6 +43,8 @@ public class NewSessionActivity extends AppCompatActivity {
         String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
         m_dateTime.setText(currentDateTimeString);
 
+        m_notes = "";
+
         m_totalKicks = 0;
         m_totalSccss = 0;
         displaySessionStats();
@@ -63,7 +61,7 @@ public class NewSessionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 1){
+        if(requestCode == 1){ // NEW KICK
             if(resultCode == RESULT_OK){
                 int[] result = data.getIntArrayExtra("kick");
                 int row = result[0];
@@ -81,6 +79,14 @@ public class NewSessionActivity extends AppCompatActivity {
                 m_totalKicks += kicks;
                 m_totalSccss += sccss;
                 displaySessionStats();
+            }
+        }
+        else if(requestCode == 2){ //ADD NOTES
+
+
+            if(resultCode == RESULT_OK) {
+                String notes = data.getStringExtra("notesString");
+                m_notes = notes;
             }
         }
     }
@@ -115,9 +121,16 @@ public class NewSessionActivity extends AppCompatActivity {
     // called from link in XML file, saves session to database
     public void saveSession(View view){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(NewSessionActivity.this);
-        boolean success = dataBaseHelper.addOne(m_dateTime.getText().toString(), sessionArrayToString());
+        boolean success = dataBaseHelper.addOne(m_dateTime.getText().toString(), sessionArrayToString(), m_notes);
         Toast.makeText(NewSessionActivity.this, "Success = " + success, Toast.LENGTH_SHORT).show();
         finish();
+
+    }
+
+    public void addNotes(View view){
+        Intent intent = new Intent(this, AddNotesActivity.class);
+        intent.putExtra("notes", m_notes);
+        startActivityForResult(intent, 2);
 
     }
 

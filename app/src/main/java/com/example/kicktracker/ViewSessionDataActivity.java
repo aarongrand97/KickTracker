@@ -3,14 +3,17 @@ package com.example.kicktracker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ViewSessionDataActivity extends AppCompatActivity {
 
     gridViewSessionDisplayDataParent m_gridView;
     int [][][] m_sessionArray = new int[7][10][2];
+    String m_notes;
 
     TextView m_displayKicksValue;
     TextView m_displaySccssValue;
@@ -28,6 +31,13 @@ public class ViewSessionDataActivity extends AppCompatActivity {
         m_gridView.setM_parentSession(ViewSessionDataActivity.this);
 
         m_sessionArray = (int[][][]) getIntent().getExtras().getSerializable("array");
+
+
+        m_notes = getIntent().getStringExtra("notes");
+        if(m_notes == null || m_notes == ""){
+            Button viewNotesButton = findViewById(R.id.ViewNotesButton);
+            viewNotesButton.setEnabled(false);
+        }
 
         m_displayKicksValue = findViewById(R.id.kickDisplayValue);
         m_displaySccssValue = findViewById(R.id.sccssDisplayValue);
@@ -79,6 +89,12 @@ public class ViewSessionDataActivity extends AppCompatActivity {
             }
         }
         m_totalPrcntg = m_totalSccss*100/m_totalKicks;
+    }
+
+    public void viewNotes(View view){
+        Intent intent = new Intent(this, ViewNotesActivity.class);
+        intent.putExtra("notes", m_notes);
+        startActivity(intent);
     }
 
     public int [][][] getSessionArray(){

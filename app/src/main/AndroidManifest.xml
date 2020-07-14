@@ -3,13 +3,16 @@
     package="com.example.kicktracker">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:fullBackupOnly="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewSessionDataActivity"></activity>
+        <activity android:name=".ViewNotesActivity"></activity>
+        <activity android:name=".AddNotesActivity" />
+        <activity android:name=".ViewSessionDataActivity" />
         <activity
             android:name=".NewKickActivity"
             android:parentActivityName=".NewSessionActivity">

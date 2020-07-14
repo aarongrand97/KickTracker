@@ -12,12 +12,12 @@ public class gridViewKickInput extends gridView {
     }
     public gridViewKickInput(Context context, AttributeSet attrs){
         super(context, attrs);
-
     }
 
     public void setM_parentSession(NewKickActivity parent){
         m_parentSession = parent;
     }
+
     private void handleTouchEvent(float x, float y){
         selectedCol = (int) x/(getWidth()/10);
         selectedRow = (int) y/(getHeight()/7);

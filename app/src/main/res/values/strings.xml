@@ -11,4 +11,7 @@
     <string name="saveSession">Save Session</string>
     <string name="percentage">Percentage</string>
     <string name="ovrl_stats">Overall Stats</string>
+    <string name="add_notes">Add Notes</string>
+    <string name="saveNotes">Save Notes</string>
+    <string name="viewNotes">View Notes</string>
 </resources>

@@ -38,17 +38,14 @@
 
     <Button
         android:id="@+id/new_kick"
-        android:layout_width="199dp"
+        android:layout_width="200dp"
         android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="20dp"
         android:onClick="newKick"
         android:text="@string/new_kick"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831" />
+        app:layout_constraintTop_toBottomOf="@+id/sccssDisplayValue" />
 
     <TextView
         android:id="@+id/kicksDisplayLabel"
@@ -56,10 +53,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="20dp"
         android:text="@string/num_kicks"
-        app:layout_constraintBottom_toTopOf="@+id/new_kick"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pitch_view" />
 
     <TextView
         android:id="@+id/kickDisplayValue"
@@ -67,9 +64,8 @@
         android:layout_height="30dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginBottom="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/new_kick"
-        app:layout_constraintStart_toEndOf="@+id/kicksDisplayLabel" />
+        app:layout_constraintStart_toEndOf="@+id/kicksDisplayLabel"
+        app:layout_constraintTop_toTopOf="@+id/kicksDisplayLabel" />
 
     <TextView
         android:id="@+id/sccssDisplayLabel"
@@ -77,10 +73,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="60dp"
         android:text="@string/num_sccss"
-        app:layout_constraintBottom_toTopOf="@+id/new_kick"
-        app:layout_constraintStart_toEndOf="@+id/kickDisplayValue" />
+        app:layout_constraintStart_toEndOf="@+id/kickDisplayValue"
+        app:layout_constraintTop_toTopOf="@+id/kickDisplayValue" />
 
     <TextView
         android:id="@+id/sccssDisplayValue"
@@ -88,17 +83,16 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toTopOf="@+id/new_kick"
-        app:layout_constraintStart_toEndOf="@+id/sccssDisplayLabel" />
+        app:layout_constraintStart_toEndOf="@+id/sccssDisplayLabel"
+        app:layout_constraintTop_toTopOf="@+id/sccssDisplayLabel" />
 
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="244dp"
-        android:layout_height="57dp"
+        android:layout_width="200dp"
+        android:layout_height="52dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:onClick="saveSession"
@@ -138,5 +132,17 @@
         android:layout_marginLeft="10dp"
         app:layout_constraintStart_toEndOf="@+id/prctgeDisplayLabel"
         app:layout_constraintTop_toTopOf="@+id/prctgeDisplayLabel" />
+
+    <Button
+        android:id="@+id/addNotesButon"
+        android:layout_width="200dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="15dp"
+        android:onClick="addNotes"
+        android:text="@string/add_notes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saveButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,18 +5,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
 
-///////////// TABLE COLUMNS ARE: | ID | SESSION_NAME | SESSION_ARRAY | /////////////
+///////////// TABLE COLUMNS ARE: | ID | SESSION_NAME | SESSION_ARRAY | NOTES | /////////////
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final String SESSIONS_TABLE = "SESSIONS_TABLE";
     public static final String COLUMN_SESSION_NAME = "SESSION_NAME";
     public static final String COLUMN_SESSION_ARRAY = "SESSION_ARRAY";
+    public static final String COLUMN_SESSION_NOTES = "SESSION_NOTES";
     public static final String COLUMN_ID = "ID";
 
     public DataBaseHelper(Context context) {
@@ -26,7 +26,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //this is called the first time the database is accessed
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + SESSIONS_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_SESSION_NAME + " TEXT, " + COLUMN_SESSION_ARRAY + " TEXT)";
+        String createTableStatement = "CREATE TABLE " + SESSIONS_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_SESSION_NAME + " TEXT, " + COLUMN_SESSION_ARRAY + " TEXT, " + COLUMN_SESSION_NOTES + " TEXT)";
 
         db.execSQL(createTableStatement);
     }
@@ -38,12 +38,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Add a session to the database
-    public boolean addOne(String sessionName, String sessionArray){
+    public boolean addOne(String sessionName, String sessionArray, String sessionNotes){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_SESSION_NAME, sessionName);
         cv.put(COLUMN_SESSION_ARRAY, sessionArray);
+        cv.put(COLUMN_SESSION_NOTES, sessionNotes);
 
         long insert = db.insert(SESSIONS_TABLE, null, cv);
         if(insert == -1)
@@ -98,6 +99,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return convertSessionStringToArray(returnString);
     }
+
+    // Gets a specific session array by its name
+    public String getSessionNotes(String sessionName){
+        String returnString = "";
+
+        String queryString = "SELECT " + COLUMN_SESSION_NOTES + " FROM " + SESSIONS_TABLE + " WHERE " + COLUMN_SESSION_NAME + " = " + "'" + sessionName + "'";
+
+        SQLiteDatabase db =this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            // loop through the results, store for the returnList
+            returnString = cursor.getString(0);
+        }
+        else{
+            // empty database dont worry about it
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnString;
+    }
+
 
     // Creates a combined array of all sessions
     public int[][][] getOverallStats(){
