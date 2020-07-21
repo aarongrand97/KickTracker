@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColour"
     tools:context=".NewKickActivity">
 
     <com.example.kicktracker.gridViewKickInput
@@ -22,10 +24,10 @@
         android:id="@+id/pitch_view"
         android:layout_width="385dp"
         android:layout_height="350dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:contentDescription="Underlying pitch png"
+        android:contentDescription="@string/pitchDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.705"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,95 +35,104 @@
         app:srcCompat="@drawable/rugby_pitch" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/kick_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginLeft="108dp"
         android:layout_marginBottom="152dp"
         android:text="@string/num_kicks"
+        android:textColor="@color/plainText"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/kicks_cntr"
+        app:layout_constraintStart_toStartOf="@+id/kicks_cntr" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/sccss_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginLeft="108dp"
         android:text="@string/num_sccss"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/textView" />
+        android:textColor="@color/plainText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/sccss_cntr"
+        app:layout_constraintStart_toStartOf="@+id/sccss_cntr"
+        app:layout_constraintTop_toTopOf="@+id/kick_label" />
 
     <TextView
         android:id="@+id/kicks_cntr"
-        android:layout_width="41dp"
-        android:layout_height="38dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:gravity="center"
+        android:textColor="@color/plainText"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/dec_kicks"
+        app:layout_constraintTop_toBottomOf="@+id/kick_label" />
 
     <TextView
         android:id="@+id/sccss_cntr"
-        android:layout_width="51dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:textColor="@color/plainText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/inc_sccss"
+        app:layout_constraintTop_toTopOf="@+id/dec_sccss" />
 
     <Button
         android:id="@+id/inc_kicks"
-        android:layout_width="41dp"
-        android:layout_height="49dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:background="@color/buttonColour"
         android:onClick="incKick"
         android:text="@string/inc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/kicks_cntr"
         app:layout_constraintTop_toTopOf="@+id/kicks_cntr" />
 
     <Button
         android:id="@+id/dec_kicks"
         android:layout_width="42dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/buttonColour"
         android:onClick="decKick"
         android:text="@string/dec"
-        app:layout_constraintEnd_toStartOf="@+id/kicks_cntr"
-        app:layout_constraintTop_toTopOf="@+id/kicks_cntr" />
+        app:layout_constraintStart_toStartOf="@+id/storeButton"
+        app:layout_constraintTop_toTopOf="@+id/kicks_cntr"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/inc_sccss"
-        android:layout_width="35dp"
+        android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/buttonColour"
         android:onClick="incSccss"
         android:text="@string/inc"
-        app:layout_constraintStart_toEndOf="@+id/sccss_cntr"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/storeButton"
         app:layout_constraintTop_toTopOf="@+id/sccss_cntr" />
 
     <Button
         android:id="@+id/dec_sccss"
-        android:layout_width="45dp"
+        android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@color/buttonColour"
         android:onClick="decSccss"
         android:text="@string/dec"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/sccss_cntr"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sccss_cntr" />
+        app:layout_constraintTop_toTopOf="@+id/inc_kicks" />
 
     <Button
         android:id="@+id/storeButton"
@@ -132,8 +143,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
+        android:background="@color/buttonColour"
         android:onClick="storeKick"
         android:text="@string/store"
+        android:textColor="@color/buttonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.546"

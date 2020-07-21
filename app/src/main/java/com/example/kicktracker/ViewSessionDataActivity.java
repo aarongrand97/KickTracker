@@ -18,6 +18,7 @@ public class ViewSessionDataActivity extends AppCompatActivity {
     TextView m_displayKicksValue;
     TextView m_displaySccssValue;
     TextView m_displayPcntgValue;
+    TextView m_dateTimeTextView;
     ConstraintLayout m_backGroundLayout;
 
     int m_totalKicks, m_totalSccss, m_totalPrcntg;
@@ -34,7 +35,7 @@ public class ViewSessionDataActivity extends AppCompatActivity {
 
 
         m_notes = getIntent().getStringExtra("notes");
-        if(m_notes == null || m_notes == ""){
+        if(m_notes == null || m_notes.isEmpty()){
             Button viewNotesButton = findViewById(R.id.ViewNotesButton);
             viewNotesButton.setEnabled(false);
         }
@@ -42,6 +43,9 @@ public class ViewSessionDataActivity extends AppCompatActivity {
         m_displayKicksValue = findViewById(R.id.kickDisplayValue);
         m_displaySccssValue = findViewById(R.id.sccssDisplayValue);
         m_displayPcntgValue = findViewById(R.id.prctgeDisplayValue);
+
+        m_dateTimeTextView = findViewById(R.id.dataTimeTextView);
+        m_dateTimeTextView.setText(getIntent().getExtras().getString("sessionName"));
 
         m_backGroundLayout  = findViewById(R.id.backgroundView);
         setBackGroundListener();
@@ -68,7 +72,12 @@ public class ViewSessionDataActivity extends AppCompatActivity {
     private void showOverallSessionStats(){
          m_displayKicksValue.setText(Integer.toString(m_totalKicks));
          m_displaySccssValue.setText(Integer.toString(m_totalSccss));
-         m_displayPcntgValue.setText(Integer.toString(m_totalPrcntg));
+         if(m_totalPrcntg != -1) {
+             m_displayPcntgValue.setText(Integer.toString(m_totalPrcntg));
+         }
+         else{
+             m_displayPcntgValue.setText("-");
+         }
     }
 
     private void setBackGroundListener(){
@@ -88,7 +97,12 @@ public class ViewSessionDataActivity extends AppCompatActivity {
                 m_totalSccss += m_sessionArray[row][col][1];
             }
         }
-        m_totalPrcntg = m_totalSccss*100/m_totalKicks;
+        if(m_totalKicks!=0) {
+            m_totalPrcntg = m_totalSccss * 100 / m_totalKicks;
+        }
+        else{
+            m_totalPrcntg=-1;
+        }
     }
 
     public void viewNotes(View view){

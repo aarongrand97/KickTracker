@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColour"
     tools:context=".ViewDataActivity">
 
     <ListView
@@ -16,6 +17,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="160dp"
+        android:background="@drawable/border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.38"
@@ -28,8 +30,10 @@
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_marginBottom="25dp"
+        android:background="@color/buttonColour"
         android:onClick="overallStatsPressed"
         android:text="@string/ovrl_stats"
+        android:textColor="@color/buttonText"
         app:layout_constraintBottom_toTopOf="@+id/sessionListView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

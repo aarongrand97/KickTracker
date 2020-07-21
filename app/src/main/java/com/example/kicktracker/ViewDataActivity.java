@@ -28,7 +28,8 @@ public class ViewDataActivity extends AppCompatActivity {
     private void populateListView(){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(ViewDataActivity.this);
         List<String> returnList = dataBaseHelper.getSessionNames();
-        ArrayAdapter customArrayAdaptor = new ArrayAdapter<>(ViewDataActivity.this, android.R.layout.simple_list_item_1, returnList);
+        //ArrayAdapter customArrayAdaptor = new ArrayAdapter<>(ViewDataActivity.this, android.R.layout.simple_list_item_1, returnList);
+        ArrayAdapter customArrayAdaptor = new ArrayAdapter<>(ViewDataActivity.this, R.layout.custom_list_view_format, R.id.customListTextView, returnList);
         m_sessionListView.setAdapter(customArrayAdaptor);
 
 
@@ -47,6 +48,7 @@ public class ViewDataActivity extends AppCompatActivity {
                 Intent intent = new Intent(ViewDataActivity.this, ViewSessionDataActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("array", sessionArray);
+                bundle.putString("sessionName", sessionName);
                 bundle.putString("notes", sessionNotes);
                 intent.putExtras(bundle);
                 // Should get the array here then pass it to the viewSessionDataActivity or maybe just the string??
