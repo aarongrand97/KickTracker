@@ -57,12 +57,14 @@
 
     <ImageView
         android:id="@+id/settingsButtonView"
-        android:tint="@color/buttonColour"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:onClick="settingsClicked"
+        android:tint="@color/buttonColour"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_settings_black_18dp" />

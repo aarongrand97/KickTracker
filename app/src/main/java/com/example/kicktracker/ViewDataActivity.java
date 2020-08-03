@@ -1,8 +1,11 @@
 package com.example.kicktracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,12 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ViewDataActivity extends AppCompatActivity {
     ListView m_sessionListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.activity_view_data);
 
         m_sessionListView = findViewById(R.id.sessionListView);
@@ -66,5 +71,17 @@ public class ViewDataActivity extends AppCompatActivity {
         bundle.putSerializable("array", overallArray);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    private void loadLocale(){
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this /* Activity context */);
+        String lang = sharedPreferences.getString("languagePreference", "");
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
 }
